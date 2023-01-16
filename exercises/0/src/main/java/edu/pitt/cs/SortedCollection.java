@@ -1,10 +1,12 @@
 package edu.pitt.cs;
 
-//TODO: Import libraries as needed
+import java.util.Collections;
+import java.util.LinkedList;
 import java.util.NoSuchElementException;
+import java.lang.NumberFormatException;
 
 public class SortedCollection {
-	// TODO: Add member variables or methods as needed
+	LinkedList<Integer> nums = new LinkedList<Integer>();
 
 	/**
 	 * Adds the number n to the collection.
@@ -13,7 +15,8 @@ public class SortedCollection {
 	 * @return always returns true
 	 */
 	public boolean add(int n) {
-		// TODO: Implement
+		nums.add(n);
+		Collections.sort(nums);
 		return true;
 	}
 
@@ -24,8 +27,8 @@ public class SortedCollection {
 	 * @return the smallest number in the collection
 	 */
 	public int remove() throws NoSuchElementException {
-		// TODO: Implement
-		return 0;
+		return nums.remove();
+		
 	}
 
 	/**
@@ -48,8 +51,15 @@ public class SortedCollection {
 			return;
 		}
 		
-		// TODO: add numbers in commandline arguments to collection using the add(int) method.
-		// If any commandline argument is not a number, call showUsage() and return.
+		for(int i = 0; i < args.length; i++){
+			try{
+				int a = Integer.parseInt(args[i]);
+				collection.add(a);
+			} catch (NumberFormatException nfe) {
+				showUsage();
+				return;
+			}
+		}
 		
 		System.out.print("sorted: ");
 		for (int i = 0; i < args.length; i++) {
